@@ -4,17 +4,17 @@ const router = express.Router();
 
 router.get('/', (req, res, next) =>{
   res.status(200).json({
-    message: 'handling get requests for products'
+    message: 'handling get requests for users'
   });
 });
 
 router.post('/', (req, res, next) =>{
   res.status(200).json({
-    message: 'handling post requests for products'
+    message: 'handling post requests for user'
   });
 });
 
-router.get('/:productId', (req, res, next) =>{
+router.get('/:userId', (req, res, next) =>{
   const id = req.params.productId;
   if(id === 'special'){
     res.status(200).json({
@@ -24,17 +24,17 @@ router.get('/:productId', (req, res, next) =>{
     });
   }else{
     res.status(200).json({
-      message: 'getting item with id = '+id,
+      message: 'getting user with id = '+id,
       name: 'item name',
       price: 1.00
     });
   }
 });
 
-router.delete('/:produId', (req, res) =>{
-  const id = req.params.productId;
+router.delete('/:orderId', (req, res) =>{
+  const id = req.params.userId;
   res.status(200).json({
-    message: 'productId{'+id+'} is deleted',
+    message: 'userId{'+id+'} is deleted',
     orderId: id
   });
 });
