@@ -5,6 +5,10 @@ const app = express();
 const productRoute = require('./api/routes/products');
 
 app.use('/products', productRoute);
-app.use('/')
+app.use('/', (req, res) => {
+  res.status(200).json({
+    message: 'handling all landing page'
+  });
+});
 
 module.exports = app;
