@@ -1,0 +1,19 @@
+{
+  "name": "restemplate",
+  "version": "1.0.0",
+  "description": "a generic resful api",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AyubIman/resTemplate.git"
+  },
+  "author": "Ayub Maxamoud Iman",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AyubIman/resTemplate/issues"
+  },
+  "homepage": "https://github.com/AyubIman/resTemplate#readme"
+}
