@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/AyubIman/resTemplate/issues"
   },
-  "homepage": "https://github.com/AyubIman/resTemplate#readme"
+  "homepage": "https://github.com/AyubIman/resTemplate#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
