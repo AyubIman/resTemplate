@@ -30,7 +30,7 @@ router.get("/", (req, res, next) =>{
     .then(results =>{
       res.status(200).json({
         message: 'found all products successfully',
-        count: result.length
+        count: result.length,
         products: results
       });
     })
@@ -63,12 +63,9 @@ router.post("/", checkAuth, upload.single('productImage'), (req, res, next) =>{
           request: {
             type: 'GET',
             url: "http://localhost:3000/products/" + result._id
-          }res.status(200).json({
-            message: 'updated product successfully',
-            result: result
-          });
+          }
         }
-      })
+      });
     })
     .catch(error => {
       console.log(error)
@@ -99,7 +96,7 @@ router.get("/:productId", (req, res, next) =>{
 });
 
 // update an existing product
-router.batch("/:productId", checkAuth, (req, res, next) => {
+router.patch("/:productId", checkAuth, (req, res, next) => {
   const id = req.params.productId;
   const updateOptions = {};
   for(const ops of req.body){

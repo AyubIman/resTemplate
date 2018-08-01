@@ -42,11 +42,11 @@ router.post("/", checkAuth, (req, res, next) =>{
       if(!product){
         return res.status(401).json({
           message: 'Product not found'
-        })
+        });
       }
       const order = new Order({
         _id: mongoose.Types.ObjectId(),
-        quantity: req.body.quantity
+        quantity: req.body.quantity,
         product: product._id
       });
       return order.save();
@@ -109,7 +109,7 @@ router.delete("/:orderId", checkAuth, (req, res, next) =>{
   const id = req.params.orderId;
   Order.remove({_id: id})
     .exec()
-    .then({
+    .then(result => {
       res.status(200).json({
         message: 'order deleted successfully'
       });

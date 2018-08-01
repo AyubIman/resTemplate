@@ -9,7 +9,7 @@ const productsRoute = require('./api/routes/products');
 const ordersRoute = require('./api/routes/orders');
 const usersRoute = require('./api/routes/users');
 //Connect to your database
-mongoose.connect('mongodb+srv://adminAyub:adminAyub1234@tayodb-kamoe.gcp.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true });
+mongoose.connect('mongodb+srv://adminAyub:adminAyub1234@tayodb-kamoe.gcp.mongodb.net/test?',{ useNewUrlParser: true });
 //apply middleware to log api req/res
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));

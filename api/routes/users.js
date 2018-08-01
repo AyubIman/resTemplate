@@ -75,7 +75,12 @@ router.post('/signin', (req, res, next) => {
         });
       });
     })
-    .catch(error => {});
+    .catch(error => {
+      res.status(500).json({
+        message: 'Auth Failed',
+        error: error
+      });
+    });
 });
 
 router.delete('/:userId', (req, res, next) =>{
