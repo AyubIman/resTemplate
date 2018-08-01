@@ -6,6 +6,7 @@ const jwt = require('jsonwebtoken'); // install it first
 const router = express.Router();
 
 router.post('/signup', (req, res, next) =>{
+    console.log("password = " , req.body);
   User.find({email: req.body.email})
     .exec()
     .then(user => {
@@ -14,10 +15,12 @@ router.post('/signup', (req, res, next) =>{
           message: 'email exist'
         })
       }else{
+        console.log("password = " + req.body.password);
         bcrypt.hash(req.body.password, 10, (error, hash) => {
+          console.log("hash = "+hash);
           if(error){
             return res.status(500).json({
-              error: error
+              error: "error creating a hash"
             });
           }else{
             const user = new User({
@@ -26,7 +29,6 @@ router.post('/signup', (req, res, next) =>{
               password: hash
             });
             user.save()
-              .exec()
               .then(user => {
                 res.status(201).json(user);
               })
@@ -41,6 +43,7 @@ router.post('/signup', (req, res, next) =>{
 });
 
 router.post('/signin', (req, res, next) => {
+  console.log(req.body.email);
   User.find({email: req.body.email})
     .exec()
     .then(user => {

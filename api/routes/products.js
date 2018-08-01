@@ -1,42 +1,49 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const multer = require('multer'); //install it first
+const upload = multer({dest: './uploads'});
 const storage = multer.diskStorage({
   destination: function(req, res, callback){
 
     callback(null,'./uploads');
   },
   filename: function(req, res, callback){
-    callback(null, Date.toISOString()+file.originalname);
+    const date = new Date();
+    const dString = date.toISOString();
+    callback(null, dString);
   }
 });
 const fileFilter = (req, res, callback) => {
-  if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+  console.log(" file fileter req = ", req);
+  if(req.file.mimetype === 'image/jpeg' || req.file.mimetype === 'image/png'){
     callback(null, false);
   }else{
     callback(new Error('message: can not save this file format'), true);
   }
 }
-const upload = multer({storage: storage, limits:{filesize: 1024 * 1024 * 5}, fileFilter: fileFilter});
+//const upload = multer({storage: storage});//, limits:{filesize: 1024 * 1024 * 5}, fileFilter: fileFilter});
 const Product = require('../models/product');
 const checkAuth = require('../middleware/check-auth');
 const router = express.Router();
 
 // get all products
 router.get("/", (req, res, next) =>{
-  Product.find()
+  console.log("get /products/", req.body);
+  Product.find({})
     .select('name price _id productImage')
     .exec()
     .then(results =>{
+      console.log("get success /products/", req.body);
+      console.log("results = ", results);
       res.status(200).json({
         message: 'found all products successfully',
-        count: result.length,
+        count: results.length,
         products: results
       });
     })
     .catch(error => {
       res.status(500).json({
-        message: 'Error: Damn Server Broke... sorry ',
+        message: 'Error: Damn Server Broke... sorry ...........',
         error: error
       });
     });
@@ -44,6 +51,7 @@ router.get("/", (req, res, next) =>{
 
 // save a new product
 router.post("/", checkAuth, upload.single('productImage'), (req, res, next) =>{
+
   const product = new Product({
     _id: mongoose.Types.ObjectId(),
     name: req.body.name,
@@ -53,7 +61,7 @@ router.post("/", checkAuth, upload.single('productImage'), (req, res, next) =>{
 // do validation
   product.save()
     .then(result => {
-      console.log(result);
+      console.log("***************",result);
       res.status(201).json({
         message: 'product saved successfully',
         newProduct: {
@@ -70,10 +78,7 @@ router.post("/", checkAuth, upload.single('productImage'), (req, res, next) =>{
     .catch(error => {
       console.log(error)
     });
-  res.status(200).json({
-    message: 'saving a product',
-    product: product
-  });
+
 });
 
 //fetch a single product

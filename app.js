@@ -8,8 +8,11 @@ const mongoose = require('mongoose');
 const productsRoute = require('./api/routes/products');
 const ordersRoute = require('./api/routes/orders');
 const usersRoute = require('./api/routes/users');
+
 //Connect to your database
-mongoose.connect('mongodb+srv://adminAyub:adminAyub1234@tayodb-kamoe.gcp.mongodb.net/test?',{ useNewUrlParser: true });
+//mongoose.connect('mongodb+srv://adminAyub:adminAyub1234@tayodb-kamoe.gcp.mongodb.net/test?',{ useNewUrlParser: true });
+mongoose.connect('mongodb://localhost:27017/ayub',{ useNewUrlParser: true });
+
 //apply middleware to log api req/res
 app.use(morgan('dev'));
 app.use('/uploads',express.static('uploads'));
@@ -39,7 +42,7 @@ app.use('/users', usersRoute);
 // });
 
 app.use((req, res, next) =>{
-  const error = new Error('Resource Not Found');
+  const error = new Error('Resource Not Found here');
   error.status = 404;
   next(error);
 });
