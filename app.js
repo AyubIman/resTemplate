@@ -12,7 +12,7 @@ const usersRoute = require('./api/routes/users');
 //Connect to your database
 //mongoose.connect('mongodb+srv://adminAyub:adminAyub1234@tayodb-kamoe.gcp.mongodb.net/test?',{ useNewUrlParser: true });
 //mongoose.connect('mongodb://localhost:27017/ayub',{ useNewUrlParser: true });
-mongoose.connect('mongodb+srv://ayub:ayub123@tayodb-kamoe.gcp.mongodb.net/test',{ useNewUrlParser: true });
+mongoose.connect('mongodb+srv://ayub:ayub123@tayodb-kamoe.gcp.mongodb.net/test?retryWrites=true',{ useNewUrlParser: true });
 
 //apply middleware to log api req/res
 app.use(morgan('dev'));
