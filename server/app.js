@@ -16,7 +16,7 @@ mongoose.connect('mongodb+srv://ayub:ayub123@tayodb-kamoe.gcp.mongodb.net/test?r
 
 //apply middleware to log api req/res
 app.use(morgan('dev'));
-app.use('/uploads',express.static('uploads'));
+app.use('../../uploads',express.static('uploads'));///home/ayub/Projects/resTemplate/uploads /home/ayub/Projects/resTemplate/server/app.js
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 
